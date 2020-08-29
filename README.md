@@ -16,7 +16,7 @@ This will globally install the module, meaning you can subsequently run it using
 
 The files in the specified directory not sorted, but checked for sort status, this is a linear operation per file.
 
-The confirmed-sorted files are merged ala mergesort, which is another linear operation given any two files/merged file content.
+The confirmed-sorted files are merged ala mergesort, which is another linear operation given any two files/merged file content. (across N files, merge will run lg(N) times, which is guaranteed to be less than the number of lines in all files)
 
 Therefore, the time complexity of the program is O(N), where N represents the number total lines across all files.
 
