@@ -20,5 +20,8 @@
     "nodemon": "^2.0.4",
     "ts-node": "^9.0.0",
     "typescript": "^4.0.2"
+  },
+  "dependencies": {
+    "n-readlines": "^1.0.0"
   }
 }
