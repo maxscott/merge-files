@@ -14,20 +14,25 @@ This will globally install the module, meaning you can subsequently run it using
 
 ### Time Complexity
 
-The files in the specified directory not sorted, but checked for sort status, this is a linear operation per file.
-
-The confirmed-sorted files are merged ala mergesort, which is another linear operation given any two files/merged file content. (across N files, merge will run lg(N) times, which is guaranteed to be less than the number of lines in all files)
-
-Therefore, the time complexity of the program is O(N), where N represents the number total lines across all files.
+Updated:
+Traverse all the files at the same time, checking individual sort order as we
+go, and checking across the K files for the next lexicographically smallest line
+for each of the N lines in all files. O(NK).
 
 ### Space Complexity
 
-The files are all loaded into memory O(N), and then the aggregated content created as a result of the merge is built up in memory O(N).
-
-Idiosyncrasies of garbage collection not withstanding, the space required in memory is O(2N), asymptotically linear space O(N).
+Updated:
+Rewrote to use pointers to files and stream directly into the output
+file, so the memory usage is now just pointers to the files. O(K) where K is the
+total number of files.
 
 ### Possible improvements
 
-The space complexity could be reduced to nearly constant by maintaining pointers to each file line and streaming directly into an output file.
+Instead of finding the min item each time, store the top items as a min-heap
+linked to the file pointers, and delete min/insert next line on each interation.
+In a fibonacci heap, find-min and insert are O(1), whereas delete-min is O(lg
+N).
 
-The time complexity could be improved if we expected a large number of duplicate lines by using bucket sort or a similar sorting algorithm that exploits a known range of values.
+This would improve performance from O(KN) to O(K log N). If the number of files
+and number of lines per file grew at the same rate, this is equivalent to going
+from O(N^2) to O(N log N).
